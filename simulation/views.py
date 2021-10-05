@@ -577,6 +577,7 @@ def simulationattack(request):
     for i in range(0, len(data)):
         if data[i] == None:
             data[i]='Aucun choix'    
+    print()        
     context={
         'recup':data,
         'filename':action
