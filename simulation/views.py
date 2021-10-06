@@ -74,11 +74,13 @@ def cate(request):
 vitess = ''
 @login_required(login_url = 'login')    
 def vitess_p(request): #1
+    categorie = ''
     vp= VitessePropagation.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('categorie')
+        categorie = request.POST.get('categorie')
         global vitess
-        vitess = var 
+        vitess = categorie 
+    request.session['categorie'] = categorie       
     context={
         "vitessePropagation":vp }
     return render(request,'alerte/vitessepropa.html', context)
@@ -86,11 +88,13 @@ def vitess_p(request): #1
 freq = ''
 @login_required(login_url = 'login')    
 def frequence(request): #2
+    vitesspro =''
     fr= Frequence.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('vitessePropagation')
+        vitesspro = request.POST.get('vitessePropagation')
         global freq
-        freq = var
+        freq = vitesspro
+    request.session['vitesspro'] = vitesspro       
     context={
         "frequence":fr }
     return render(request,'alerte/frequence.html', context)
@@ -100,9 +104,10 @@ profond = ''
 def profondeur(request):#3
     pro= Profondeur.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('frequence')
+        frequence = request.POST.get('frequence')
         global profond
-        profond = var
+        profond = frequence
+        request.session['frequence'] = frequence       
     context={
         'profondeur':pro,
     }
@@ -111,11 +116,13 @@ def profondeur(request):#3
 niveaucon = ''
 @login_required(login_url = 'login')    
 def niveauControle(request):#4
+    profondeur = '' 
     nc= NiveauControle.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('profondeur')
+        profondeur = request.POST.get('profondeur')
         global niveaucon
-        niveaucon = var 
+        niveaucon = profondeur
+    request.session['profondeur'] = profondeur       
     context={
         'niveauControle':nc
             }
@@ -123,11 +130,14 @@ def niveauControle(request):#4
 nivopert = ''
 @login_required(login_url = 'login')    
 def niveauPerte(request):
+    nivocnt = ''
     np= NiveauPerte.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('niveauControle')
+        nivocnt = request.POST.get('niveauControle')
         global nivopert
-        nivopert = var
+        nivopert = nivocnt
+    request.session['nivocnt'] = nivocnt       
+    
     context={
         'niveauPerte':np
     }
@@ -147,6 +157,7 @@ def flatten(lis):
 @login_required(login_url = 'login')    
 def simulation(request):
     filename = '' 
+    nivoperte = '' 
     recup5, data = [],[]
     recup5.append(vitess)
     recup5.append(freq)
@@ -154,8 +165,15 @@ def simulation(request):
     recup5.append(niveaucon)
     recup5.append(nivopert)
     if request.method == 'POST':
-        nip  = request.POST.get('niveauPerte')
-        recup5.append(nip)    
+        nivoperte  = request.POST.get('niveauPerte')
+        recup5.append(nivoperte)  
+    request.session['nivoperte'] = nivoperte         
+    categorie  = request.session.get('categorie', None)            
+    vitesspro  = request.session.get('vitesspro', None)            
+    frequence  = request.session.get('frequence', None)            
+    profondeur  = request.session.get('profondeur', None)            
+    nivocnt  = request.session.get('nivocnt', None)            
+    nivoperte  = request.session.get('nivoperte', None)            
     data= list(flatten(recup5))
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -380,7 +398,13 @@ def simulation(request):
     
     context={
         'recup':data,
-        'filename':filename
+        'filename':filename,
+        'categorie':categorie,
+        'vitesspro': vitesspro,            
+        'frequence':frequence,          
+        'profondeur'  :profondeur,           
+        'nivocnt' : nivocnt,            
+        'nivoperte': nivoperte
     }
     return render (request, 'alerte/simulation.html', context) 
 

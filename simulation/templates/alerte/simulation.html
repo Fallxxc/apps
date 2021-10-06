@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}{% load static %}
+{% extends 'base.html' %} {% block content %}{% load static %}{{ nivoperte}}{{ nivocnt}}
 <div class="w3-row w3-border" style="margin: 40px; ">
     <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
         <h3> <b> Récapitulatif des modalités</b>
@@ -49,13 +49,12 @@
             <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
                 <div>
                     <div class="card-body">
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe: {{ recup.0}}
-                    </button></h5>
-                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de Propagation: {{ recup.1}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ recup.2}}</button> </p>
-                        <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{ recup.3}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ recup.4}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ recup.5}}</button></p>
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ categorie }}</button></h5>
+                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de Propagation: {{ vitesspro}}</button></p>
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ frequence}}</button> </p>
+                        <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{ profondeur}}</button></p>
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ nivocnt}}</button></p>
+                        <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ nivoperte}}</button></p>
                     </div>
                     <div style="text-align: center;padding: 20px; font-size: 20px;">
                         {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
