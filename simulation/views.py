@@ -433,7 +433,7 @@ def Rebondinfo(request):#3
     }
     return render(request,'attaque/rebond.html', context)
 
-
+nip =''
 @login_required(login_url = 'login')    
 def simulationattack(request):
     action = '' 
@@ -442,8 +442,10 @@ def simulationattack(request):
     recup5.append(paru_info)
     recup5.append(rebond_info)
     if request.method == 'POST':
-        nip  = request.POST.get('rebond')
-        recup5.append(nip)   
+        var  = request.POST.get('rebond')
+        global nip
+        nip = var
+        recup5.append(var)   
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"]      
@@ -579,8 +581,11 @@ def simulationattack(request):
             data[i]='Aucun choix'    
     context={
         'recup':data,
-        'filename':action
-    }
+        'filename':action,
+        'nature_info':nature_info,
+        'paru_info':paru_info,
+        'rebond_info':rebond_info,
+        'nip':nip    }
     return render (request, 'attaque/simulationattack.html', context)
 
 @login_required(login_url = 'login')    
@@ -598,3 +603,4 @@ def custom_permission_denied_view(request, exception=None):
 @login_required(login_url = 'login')    
 def custom_bad_request_view(request, exception=None):
     return render(request, "errors/400.html", {})
+
