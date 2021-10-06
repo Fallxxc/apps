@@ -403,15 +403,22 @@ def simulation(request):
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
     # print("ok",nivocnt)
-    # data2 = [] 
-    # data2.append(categorie)
-    # data2.append(vitesspro)
-    # data2.append(frequence)
-    # data2.append(profondeur)
-    # data2.append(nivocnt)
-    # data2.append(nivoperte)
+    data2 = [] 
+    data2.append(categorie)
+    data2.append(vitesspro)
+    data2.append(frequence)
+    data2.append(profondeur)
+    data2.append(nivocnt)
+    data2.append(nivoperte)
+    print(data)
+    if data == data2:
+        print("ok")
+        pass
+    else:
+        print("non")
+        data = data2    
 
-
+    print(data)
     context={
         'recup':data,
         'filename':filename,
