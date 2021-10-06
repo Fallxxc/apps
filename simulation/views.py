@@ -399,7 +399,7 @@ def Natureinformation(request):
 nature_info = ''
 @login_required(login_url = 'login')    
 def Parutioninfo(request): #1
-    nat =''
+    natinf =''
     paruinfo= Parution.objects.all()
     if request.method == 'POST':
         natinf = request.POST.get('natureinfo')
@@ -413,6 +413,7 @@ def Parutioninfo(request): #1
 paru_info = ''
 @login_required(login_url = 'login')    
 def Perceptsupport(request): #2
+    paruinf =''
     percepsupport= Perceptionsupport.objects.all()
     if request.method == 'POST':
         paruinf = request.POST.get('paruinfo')
@@ -427,12 +428,13 @@ def Perceptsupport(request): #2
 rebond_info = ''
 @login_required(login_url = 'login')    
 def Rebondinfo(request):#3
+    perceptsup = ''
     rebond= Rebond.objects.all()
     if request.method == 'POST':
-        perc_sup = request.POST.get('percepsupport')
+        perceptsup = request.POST.get('percepsupport')
         global rebond_info
-        rebond_info = perc_sup
-    request.session['perc_sup'] = perc_sup   
+        rebond_info = perceptsup
+    request.session['perceptsup'] = perceptsup   
     context={
         'rebond':rebond,
         # 'nat':nat
@@ -443,6 +445,7 @@ nip =''
 @login_required(login_url = 'login')    
 def simulationattack(request):
     action = '' 
+    rebondinf = ''
     recup5, data = [],[]
     recup5.append(nature_info)
     recup5.append(paru_info)
@@ -455,7 +458,7 @@ def simulationattack(request):
         recup5.append(rebondinf)   
     natinf  = request.session.get('natinf', None)        
     paruinf  = request.session.get('paruinf', None)        
-    perc_sup  = request.session.get('perc_sup', None)        
+    perceptsup  = request.session.get('perceptsup', None)        
     rebondinf  = request.session.get('rebondinf', None)        
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
@@ -595,7 +598,7 @@ def simulationattack(request):
         'filename':action,
         'natinf': natinf, 
         'paruinf':paruinf,
-        'perc_sup':perc_sup,
+        'perceptsup':perceptsup,
         'rebondinf':rebondinf    }
     return render (request, 'attaque/simulationattack.html', context)
 
