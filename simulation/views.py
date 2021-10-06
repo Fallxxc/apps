@@ -399,11 +399,13 @@ def Natureinformation(request):
 nature_info = ''
 @login_required(login_url = 'login')    
 def Parutioninfo(request): #1
+    nat =''
     paruinfo= Parution.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('natureinfo')
+        natinf = request.POST.get('natureinfo')
         global nature_info
-        nature_info = var
+        nature_info = natinf
+    request.session['natinf'] = natinf   
     context={
         "paruinfo":paruinfo }
     return render(request,'attaque/paruinfo.html', context)
@@ -413,11 +415,13 @@ paru_info = ''
 def Perceptsupport(request): #2
     percepsupport= Perceptionsupport.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('paruinfo')
+        paruinf = request.POST.get('paruinfo')
         global paru_info
-        paru_info = var    
+        paru_info = paruinf   
+    request.session['paruinf'] = paruinf   
+     
     context={
-        "percepsupport":percepsupport }
+        "percepsupport":percepsupport}
     return render(request,'attaque/perceptionsupport.html', context)
 
 rebond_info = ''
@@ -425,11 +429,13 @@ rebond_info = ''
 def Rebondinfo(request):#3
     rebond= Rebond.objects.all()
     if request.method == 'POST':
-        var = request.POST.get('percepsupport')
+        perc_sup = request.POST.get('percepsupport')
         global rebond_info
-        rebond_info = var
+        rebond_info = perc_sup
+    request.session['perc_sup'] = perc_sup   
     context={
-        'rebond':rebond
+        'rebond':rebond,
+        # 'nat':nat
     }
     return render(request,'attaque/rebond.html', context)
 
@@ -442,10 +448,15 @@ def simulationattack(request):
     recup5.append(paru_info)
     recup5.append(rebond_info)
     if request.method == 'POST':
-        var  = request.POST.get('rebond')
+        rebondinf  = request.POST.get('rebond')
+        request.session['rebondinf'] = rebondinf   
         global nip
-        nip = var
-        recup5.append(var)   
+        nip = rebondinf
+        recup5.append(rebondinf)   
+    natinf  = request.session.get('natinf', None)        
+    paruinf  = request.session.get('paruinf', None)        
+    perc_sup  = request.session.get('perc_sup', None)        
+    rebondinf  = request.session.get('rebondinf', None)        
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"]      
@@ -580,12 +591,12 @@ def simulationattack(request):
         if data[i] == None:
             data[i]='Aucun choix'    
     context={
-        # 'recup':data,
+        'recup':data,
         'filename':action,
-        'nature_info':nature_info,
-        'paru_info':paru_info,
-        'rebond_info':rebond_info,
-        'nip':nip    }
+        'natinf': natinf, 
+        'paruinf':paruinf,
+        'perc_sup':perc_sup,
+        'rebondinf':rebondinf    }
     return render (request, 'attaque/simulationattack.html', context)
 
 @login_required(login_url = 'login')    
