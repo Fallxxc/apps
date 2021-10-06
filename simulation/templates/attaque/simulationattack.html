@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %} {% load static %} {{ natinf }}-{{ paruinf }} -{{ perc_sup }}-{{ rebondinf }}
+{% extends 'base.html' %} {% block content %} {% load static %}
 
 <div class="w3-row w3-border" style="margin: 40px; ">
     <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
@@ -14,9 +14,11 @@
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 450px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br>
+                <div class="card-body text-center " style="height: 450px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if natinf %}
 
-                    <h4 class="card-title "> <b> {{ natinf }}</b> </h4>
+                    <h4 class="card-title "> <b> {{ natinf }}</b> </h4>{% else %}
+                    <h4 class="card-title "> <b> {{ recup.0 }}</b> </h4>{% endif %}
+
                 </div>
             </div>
         </div><br>
@@ -50,11 +52,37 @@
             <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
                 <div>
                     <div class="card-body">
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ natinf}} &nbsp;&nbsp;
-                        </button></h5>
+
+                        {% if natinf %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ natinf}} &nbsp;&nbsp;</button></h5>{% else %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ recup.0}} &nbsp;&nbsp;</button></h5>{% endif %}
+
+                        <!--  -->
+                        {% if paruinf %}
                         <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ paruinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ perceptsup}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>                            </p>
+                        {% else %}
+                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ recup.1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
+                        {% endif %}
+
+
+                        <!--  -->
+                        {% if perceptsup %}
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ perceptsup}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p>
+                        {% else %}
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ recup.2}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p>
+                        {% endif %}
+
+                        <!--  -->
+                        {% if rebondinf %}
                         <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ rebondinf}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
+                        {% else %}
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ recup.4 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p>{% endif %}
+
+                        <!--  -->
+
                     </div> <br>
                     <div style="text-align: center;">
                         <h4>Plan d'action</h4>
@@ -67,4 +95,4 @@
 </div>
 
 
-{% endblock content %}}
+{% endblock content %}
