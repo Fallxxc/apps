@@ -412,8 +412,8 @@ def simulation(request):
     data2.append(nivoperte)
     print("avant", data)
     print("avant data2", data2)
-    if len(data) < len(data2):
-        for i in range(data2):
+    if '' in data or len(data) < len(data2):
+        for i in range(len(data2)):
             if data[i] and data[i]=='':
                 data[i] = data2[i]
             else:
