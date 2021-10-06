@@ -580,7 +580,7 @@ def simulationattack(request):
         if data[i] == None:
             data[i]='Aucun choix'    
     context={
-        'recup':data,
+        # 'recup':data,
         'filename':action,
         'nature_info':nature_info,
         'paru_info':paru_info,
