@@ -403,23 +403,25 @@ def simulation(request):
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
     # print("ok",nivocnt)
-    data2 = [] 
-    data2.append(categorie)
-    data2.append(vitesspro)
-    data2.append(frequence)
-    data2.append(profondeur)
-    data2.append(nivocnt)
-    data2.append(nivoperte)
-    print("avant", data)
-    print("avant data2", data2)
-    if '' in data or len(data) < len(data2):
-        for i in range(len(data2)):
-            if data[i] and data[i]=='':
-                data[i] = data2[i]
-            else:
-                data[5].append(data2[5])
-    print("apres data2", data2)
-    print("apres data", data)
+    # data2 = [] 
+    # data2.append(categorie)
+    # data2.append(vitesspro)
+    # data2.append(frequence)
+    # data2.append(profondeur)
+    # data2.append(nivocnt)
+    # data2.append(nivoperte)
+    if categorie not in data or data[0]=='':
+        data[0]=categorie 
+    if vitesspro not in data or data[1]=='':
+        data[1]=vitesspro  
+    if frequence not in data or data[2]=='':
+        data[2]=frequence  
+    if profondeur not in data or data[3]=='':
+        data[3]=profondeur  
+    if nivocnt not in data or data[4]=='':
+        data[4]=nivocnt  
+    if nivoperte not in data or data[5]=='':
+        data[5]=nivoperte     
 
     context={
         'recup':data,
