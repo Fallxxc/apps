@@ -10,10 +10,9 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
-import os 
-import django_on_heroku
-from pathlib import Path
 
+import environ
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,16 +27,14 @@ SECRET_KEY = 'django-insecure-*a94uhvk0e0k6^$^f*@z+h%vp8to80d86iz)8!3@(!_(e(#3lh
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-# ALLOWED_HOSTS = ['*']
-ALLOWED_HOSTS = ['bsmart.herokuapp.com']
-import environ
+ALLOWED_HOSTS = ['*']
 env = environ.Env(
     POSTGRES_MAIN_DB_HOST=(str, ""),
     POSTGRES_MAIN_DB_PORT=(int, 0),
     POSTGRES_MAIN_DB_NAME=(str, ""),
     POSTGRES_MAIN_DB_USER=(str, ""),
     POSTGRES_MAIN_DB_PASSWORD=(str, ""),
-    )
+)
 
 # Application definition
 
@@ -54,6 +51,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -106,7 +104,6 @@ DATABASES = {
 }
 
 
-
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -138,27 +135,38 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
-import os
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [
-  BASE_DIR / 'static',
-#   BASE_DIR / 'alerte' /'static',
-#   BASE_DIR / 'simulation' /'static'
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',
 
-]
+# ]
 
-STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+# STATIC_ROOT = os.path.join(os.path.dirname(
+#     BASE_DIR), "static_cdn", "static_root")
+# MEDIA_URL = "/media/"
+# MEDIA_ROOT = os.path.join(os.path.dirname(
+#     BASE_DIR), "static_cdn", "media_root")
+
+STATIC_ROOT = BASE_DIR / 'static'
+
+STATIC_URL = "/static/"
+
+STATICFILES_DIRS = ["bsmart/static"]
+MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
-MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
-django_on_heroku.settings(locals())
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+try:
+    from .local_settings import *
+except ImportError:
+    pass

@@ -1,54 +1,68 @@
-{% extends 'accounts/main.html' %} {% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- les dossier staticsont dans src static js -->
+<style>
+    #card {
+        height: 100px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+        border-radius: 20px;
+        margin-top: 20px;
+    }
+
+    #card2 {
+        height: 180px;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+        border-radius: 20px;
+    }
+</style>
 <div class="w3-row w3-border" style="margin: 40px; ">
     <div class="w3-third w3-container" style="margin-top: 20px; margin-bottom: 20px; ">
         <div class="col-xs-12 col-sm-6 col-md-10">
             <div class="card">
-                <div class="card-body text-center" style="height: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px; margin-top: 20px;">
+                <div class="card-body text-center" id="card">
                     <h4 class="card-title "> <b> Nature des catastrophes</b> </h4>
                 </div>
             </div>
         </div><br>
-        <div class="col-xs-12 col-sm-6 col-md-10 ">
+        <div class="col-xs-12 col-sm-6 col-md-10">
             <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br>
+                <div class="card-body text-center" id="card2"> <br><br>
                     <h4 class="card-title "> <b> Naturelle</b> </h4>
                 </div>
             </div>
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "><br><br>
+                <div class="card-body text-center" id="card2"><br><br>
                     <h4 class="card-title "> <b> Sanitaire</b></h4>
                 </div>
             </div>
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px; "> <br><br>
+                <div class="card-body text-center" id="card2"> <br><br>
                     <h4 class="card-title "> <b> Sécuritaire</b> </h4>
                 </div>
             </div>
         </div>
     </div>
-    <div class="w3-twothird w3-container w3-white " style="margin-top: 100px;width: 55%;border-radius: 2%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);">
+    <div class="w3-twothird w3-container w3-white" style="margin-top: 100px;width: 55%;border-radius: 2%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);">
         <div style="background-color: white; width: 90%; height: 70%; margin: 5%; ">
             <div>
-                <span class="align-baseline " style="margin-top: 20px; margin-left: 2%; margin-right: 20%; font-size: 20px; "> <b> Nature des catastrophes</b></span>
-                <span class="align-baseline "><button class=" btn btn-outline-warning " type="submit " name="save " value="save " id="toggle" style="margin-top: 20px; font-size: 15px;"> Start simulation</button></span>
+                <span class="align-baseline" style="margin-top: 20px; margin-left: 2%; margin-right: 20%; font-size: 20px;"> <b> Nature des catastrophes</b></span>
+                <span class="align-baseline"><button class=" btn btn-outline-warning" type="submit" name="save" value="save" id="toggle" style="margin-top: 20px; font-size: 15px;"> Start simulation</button></span>
             </div>
             <div id="third" style=" display: none">
-                <hr style="height:2px; width:95%; border-width:0;margin: 2%; color:rgb(136, 130, 130); background-color:rgb(10, 10, 10) ">
+                <hr style="height:2px; width:95%; border-width:0;margin: 2%; color:rgb(136, 130, 130); background-color:rgb(10, 10, 10)">
                 <div class="question ml-sm-5 pl-sm-5 pt-2">
                     <form method="POST" action="{% url 'vitess_p' %}">
                         {% csrf_token %}
-                        <div style="margin-left: 5%; ">{% for i in categorie %}
-                            <label class="options"> {{ i.cathegorie_name }}                            
+                        <div style="margin-left: 5%;">{% for i in categorie %}
+                            <label class="options"> {{ i.cathegorie_name }}
                             <input type="radio" name="categorie" value="{{i}}" required> <span class="checkmark"></span></label><br><br> {% endfor %} </div>
-                        <hr style="height:2px; width:100%; border-width:0; color:rgb(19, 18, 18); background-color:rgb(10, 10, 10); ; ">
+                        <hr style="height:2px; width:90%; border-width:0; color:rgb(19, 18, 18); background-color:rgb(10, 10, 10); ;">
 
-                        <div class="d-flex align-items-center pt-3 ">
-                            <div class="ml-auto mr-sm-5 ">
+                        <div class="d-flex align-items-center pt-3">
+                            <div class="ml-auto mr-sm-5">
                                 <button class="btn btn-outline-success" type="submit" value="Submit" name="submit" id="checked">Suivant</button>
                             </div>
                         </div>
