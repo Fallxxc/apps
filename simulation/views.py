@@ -78,8 +78,9 @@ def vitess_p(request): #1
     vp= VitessePropagation.objects.all()
     if request.method == 'POST':
         categorie = request.POST.get('categorie')
+        var = request.POST.get('categorie')
         global vitess
-        vitess = categorie 
+        vitess = var 
     request.session['categorie'] = categorie       
     context={
         "vitessePropagation":vp }
@@ -92,8 +93,9 @@ def frequence(request): #2
     fr= Frequence.objects.all()
     if request.method == 'POST':
         vitesspro = request.POST.get('vitessePropagation')
+        var = request.POST.get('vitessePropagation')
         global freq
-        freq = vitesspro
+        freq = var
     request.session['vitesspro'] = vitesspro       
     context={
         "frequence":fr }
@@ -105,8 +107,9 @@ def profondeur(request):#3
     pro= Profondeur.objects.all()
     if request.method == 'POST':
         frequence = request.POST.get('frequence')
+        var = request.POST.get('frequence')
         global profond
-        profond = frequence
+        profond = var
         request.session['frequence'] = frequence       
     context={
         'profondeur':pro,
@@ -120,8 +123,9 @@ def niveauControle(request):#4
     nc= NiveauControle.objects.all()
     if request.method == 'POST':
         profondeur = request.POST.get('profondeur')
+        var = request.POST.get('profondeur')
         global niveaucon
-        niveaucon = profondeur
+        niveaucon = var
     request.session['profondeur'] = profondeur       
     context={
         'niveauControle':nc
@@ -134,8 +138,9 @@ def niveauPerte(request):
     np= NiveauPerte.objects.all()
     if request.method == 'POST':
         nivocnt = request.POST.get('niveauControle')
+        var = request.POST.get('niveauControle')
         global nivopert
-        nivopert = nivocnt
+        nivopert = var
     request.session['nivocnt'] = nivocnt       
     
     context={
@@ -166,7 +171,8 @@ def simulation(request):
     recup5.append(nivopert)
     if request.method == 'POST':
         nivoperte  = request.POST.get('niveauPerte')
-        recup5.append(nivoperte)  
+        var  = request.POST.get('niveauPerte')
+        recup5.append(var)  
     request.session['nivoperte'] = nivoperte         
     categorie  = request.session.get('categorie', None)            
     vitesspro  = request.session.get('vitesspro', None)            
@@ -175,6 +181,7 @@ def simulation(request):
     nivocnt  = request.session.get('nivocnt', None)            
     nivoperte  = request.session.get('nivoperte', None)            
     data= list(flatten(recup5))
+    # print(data)
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit3 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Non récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -395,7 +402,15 @@ def simulation(request):
         filename = 'SECUR20.pdf'
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
-    
+    # print("ok",nivocnt)
+    # data2 = [] 
+    # data2.append(categorie)
+    # data2.append(vitesspro)
+    # data2.append(frequence)
+    # data2.append(profondeur)
+    # data2.append(nivocnt)
+    # data2.append(nivoperte)
+    # print("data2", data2)
     context={
         'recup':data,
         'filename':filename,
@@ -404,7 +419,8 @@ def simulation(request):
         'frequence':frequence,          
         'profondeur'  :profondeur,           
         'nivocnt' : nivocnt,            
-        'nivoperte': nivoperte
+        'nivoperte': nivoperte,
+        # 'data2':data2
     }
     return render (request, 'alerte/simulation.html', context) 
 
@@ -616,7 +632,8 @@ def simulationattack(request):
         action = "Aucun plan d'action ne correspond aux choix effectués"
     for i in range(0, len(data)):
         if data[i] == None:
-            data[i]='Aucun choix'    
+            data[i]='Aucun choix'
+    print(data)            
     context={
         'recup':data,
         'filename':action,

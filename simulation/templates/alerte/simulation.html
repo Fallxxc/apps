@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}{% load static %}{{ nivoperte}}{{ nivocnt}}
+{% extends 'base.html' %} {% block content %}{% load static %}
 <div class="w3-row w3-border" style="margin: 40px; ">
     <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
         <h3> <b> Récapitulatif des modalités</b>
@@ -60,7 +60,7 @@
                         {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
                         <p> {{ filename }} </p>{% else %}
                         <button type="button" class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                            <a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
+                            <a href="{% static filename %} ">Générer fiche de décision </a></button>
 
                     </div>
                 </div>
