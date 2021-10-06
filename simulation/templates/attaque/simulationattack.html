@@ -14,10 +14,11 @@
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 450px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if natinf %}
+                <div class="card-body text-center " style="height: 450px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if recup.0 %}
 
-                    <h4 class="card-title "> <b> {{ natinf }}</b> </h4>{% else %}
-                    <h4 class="card-title "> <b> {{ recup.0 }}</b> </h4>{% endif %}
+                    <h4 class="card-title "> <b> {{ recup.0  }}</b> </h4>{% else %} {% if natinf %}
+                    <h4 class="card-title "> <b> {{ natinf }}</b> {% else %}
+                        <h4 class="card-title "> <b> Choix non  sauvegardé</b> </h4>{% endif %}{% endif %}
 
                 </div>
             </div>
@@ -53,34 +54,39 @@
                 <div>
                     <div class="card-body">
 
-                        {% if natinf %}
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ natinf}} &nbsp;&nbsp;</button></h5>{% else %}
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ recup.0}} &nbsp;&nbsp;</button></h5>{% endif %}
+                        {% if recup.0 %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ recup.0 }} &nbsp;&nbsp;</button></h5>{% else %}{% if natinf %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ natinf }} &nbsp;&nbsp;</button></h5>{% else %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Merci de refaire le le choix sur Nature de l'information &nbsp;&nbsp;</button></h5>{% endif %}{% endif %}
 
                         <!--  -->
-                        {% if paruinf %}
-                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ paruinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        {% else %}
+                        {% if recup.1 %}
                         <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ recup.1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
+                        {% else %}{% if perceptsup %}{% else %}{% endif %}
+                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ paruinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
                         {% endif %}
 
 
-                        <!--  -->
-                        {% if perceptsup %}
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ perceptsup}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>
-                        {% else %}
+                        <!-- percepsu -->
+                        {% if recup.2 %}
                         <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ recup.2}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
                         </p>
-                        {% endif %}
+                        {% else %}{% if perceptsup %}
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ perceptsup}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
 
-                        <!--  -->
-                        {% if rebondinf %}
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ rebondinf}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        {% else %}
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ recup.4 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>{% endif %}
+                        </p> {% else %}
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: choix perdu &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p>
+                        {% endif %} {% endif %}
+                        <!--rebond  -->
 
+                        {% if recup.4 %}
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{recup.4}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
+                        {% else %}{% if rebondinf %}
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ rebondinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">merci de choisir le rebond de l'information &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                        </p> {% endif %}{% endif %}
                         <!--  -->
 
                     </div> <br>

@@ -248,7 +248,7 @@ def simulation(request):
     sec20=['Crise ou Catastrophe Sécuritaire', 'Rapide', 'Non récurrente', 'Nationale','Hors Contrôle' ,'Matériel & Humain']
 
     # la gestion des catastroph sanitaire 
-    if data==sanit1:
+    if data == sanit1:
         filename = 'SANIT1.pdf'
     elif data==sanit2:
         filename = 'SANIT2.pdf'
@@ -403,14 +403,24 @@ def simulation(request):
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
     # print("ok",nivocnt)
-    # data2 = [] 
-    # data2.append(categorie)
-    # data2.append(vitesspro)
-    # data2.append(frequence)
-    # data2.append(profondeur)
-    # data2.append(nivocnt)
-    # data2.append(nivoperte)
-    # print("data2", data2)
+    data2 = [] 
+    data2.append(categorie)
+    data2.append(vitesspro)
+    data2.append(frequence)
+    data2.append(profondeur)
+    data2.append(nivocnt)
+    data2.append(nivoperte)
+    print("avant", data)
+    print("avant data2", data2)
+    if len(data) < len(data2):
+        for i in range(data2):
+            if data[i] and data[i]=='':
+                data[i] = data2[i]
+            else:
+                data.append(data2[i])
+    print("apres data2", data2)
+    print("apres data", data)
+
     context={
         'recup':data,
         'filename':filename,
@@ -486,7 +496,7 @@ nip =''
 def simulationattack(request):
     action = '' 
     rebondinf = ''
-    recup5, data = [],[]
+    recup5, data, data2 = [],[],[]
     recup5.append(nature_info)
     recup5.append(paru_info)
     recup5.append(rebond_info)
@@ -633,14 +643,17 @@ def simulationattack(request):
     for i in range(0, len(data)):
         if data[i] == None:
             data[i]='Aucun choix'
-    print(data)            
+    # data2 = data 
+
     context={
         'recup':data,
         'filename':action,
         'natinf': natinf, 
         'paruinf':paruinf,
         'perceptsup':perceptsup,
-        'rebondinf':rebondinf    }
+        'rebondinf':rebondinf ,
+        'data2': data2  
+         }
     return render (request, 'attaque/simulationattack.html', context)
 
 @login_required(login_url = 'login')    
