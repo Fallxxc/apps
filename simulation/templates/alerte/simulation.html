@@ -49,13 +49,26 @@
             <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
                 <div>
                     <div class="card-body">
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ categorie }}</button></h5>
-                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de Propagation: {{ vitesspro}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ frequence}}</button> </p>
-                        <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{ profondeur}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ nivocnt}}</button></p>
-                        <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ nivoperte}}</button></p>
+                        {% if categorie %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ categorie }}</button></h5>{% else %}
+                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ recup.0 }}</button></h5>
+                        {% endif %} {% if vitesspro %}
+
+                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de Propagation: {{ vitesspro}}</button></p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de Propagation: {{ recup.1}}</button></p>{% endif %} {% if frequence %}
+
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ frequence}}</button> </p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ recup.2}}</button> </p>{% endif %} {% if profondeur %}
+
+                        <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{ profondeur}}</button></p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{ recup.3}}</button></p>{% endif %} {% if nivocnt %}
+
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ nivocnt}}</button></p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ recup.4}}</button></p>{% endif %} {% if nivoperte %}
+                        <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ nivoperte}}</button></p>{% else %}
+                        <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ recup.5}}</button></p>{% endif %}
                     </div>
+
                     <div style="text-align: center;padding: 20px; font-size: 20px;">
                         {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
                         <p> {{ filename }} </p>{% else %}
