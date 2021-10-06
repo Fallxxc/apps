@@ -14,9 +14,10 @@
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 400px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br>
-
-                    <h4 class="card-title "> <b> {{ recup.0}}</b> </h4>
+                <div class="card-body text-center " style="height: 400px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if categorie %}
+                    <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ categorie }}</button></h5>{% else %}
+                    <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">catastrophe:  {{ recup.0 }}</button></h5>
+                    {% endif %}
                 </div>
             </div>
         </div><br>
