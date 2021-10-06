@@ -417,7 +417,7 @@ def simulation(request):
             if data[i] and data[i]=='':
                 data[i] = data2[i]
             else:
-                data.append(data2[i])
+                data[5].append(data2[5])
     print("apres data2", data2)
     print("apres data", data)
 
