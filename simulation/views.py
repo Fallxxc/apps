@@ -226,7 +226,7 @@ def simulation(request):
     datastor.append(nivocnt)
     datastor.append(nivoperte)
     # print(datastor)
-    if len(dadat)<6 or '' in data:
+    if len(data)<6 or '' in data:
         data = datastor
 
     # print(data)
