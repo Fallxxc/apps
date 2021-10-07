@@ -81,7 +81,11 @@ def vitess_p(request): #1
         var = request.POST.get('categorie')
         global vitess
         vitess = var 
-    request.session['categorie'] = categorie       
+    request.session['categorie'] = categorie  
+    # categorie  = request.session.get('categorie', None)            
+    with open('categorie.txt', 'w') as mytextfile:
+        mytextfile.write(vitess)
+     
     context={
         "vitessePropagation":vp }
     return render(request,'alerte/vitessepropa.html', context)
@@ -96,7 +100,10 @@ def frequence(request): #2
         var = request.POST.get('vitessePropagation')
         global freq
         freq = var
-    request.session['vitesspro'] = vitesspro       
+    request.session['vitesspro'] = vitesspro 
+    # vitesspro  = request.session.get('vitesspro', None)            
+    with open('vitesspro.txt', 'w') as mytextfile:
+        mytextfile.write(freq)
     context={
         "frequence":fr }
     return render(request,'alerte/frequence.html', context)
@@ -104,13 +111,18 @@ def frequence(request): #2
 profond = ''
 @login_required(login_url = 'login')    
 def profondeur(request):#3
+    frequence = ''
     pro= Profondeur.objects.all()
     if request.method == 'POST':
         frequence = request.POST.get('frequence')
         var = request.POST.get('frequence')
         global profond
         profond = var
-        request.session['frequence'] = frequence       
+    request.session['frequence'] = frequence     
+    # frequence  = request.session.get('frequence', None)            
+    with open('frequence.txt', 'w') as mytextfile:
+        mytextfile.write(profond)
+
     context={
         'profondeur':pro,
     }
@@ -126,11 +138,15 @@ def niveauControle(request):#4
         var = request.POST.get('profondeur')
         global niveaucon
         niveaucon = var
-    request.session['profondeur'] = profondeur       
+    request.session['profondeur'] = profondeur
+    # profondeur  = request.session.get('profondeur', None)            
+    with open('profondeur.txt', 'w') as mytextfile:
+        mytextfile.write(niveaucon)   
     context={
         'niveauControle':nc
             }
     return render(request,'alerte/nivocontrol.html', context)
+
 nivopert = ''
 @login_required(login_url = 'login')    
 def niveauPerte(request):
@@ -142,7 +158,9 @@ def niveauPerte(request):
         global nivopert
         nivopert = var
     request.session['nivocnt'] = nivocnt       
-    
+    # nivocnt  = request.session.get('nivocnt', None)            
+    with open('nivocnt.txt', 'w') as mytextfile:
+        mytextfile.write(nivopert)
     context={
         'niveauPerte':np
     }
@@ -159,28 +177,58 @@ def flatten(lis):
          else:        
              yield item
 
+
+nivpert = ''
 @login_required(login_url = 'login')    
 def simulation(request):
     filename = '' 
     nivoperte = '' 
-    recup5, data = [],[]
+    recup5, data, datastor = [],[],[]
     recup5.append(vitess)
     recup5.append(freq)
     recup5.append(profond)
     recup5.append(niveaucon)
     recup5.append(nivopert)
+
     if request.method == 'POST':
         nivoperte  = request.POST.get('niveauPerte')
         var  = request.POST.get('niveauPerte')
+        global nivpert
         recup5.append(var)  
-    request.session['nivoperte'] = nivoperte         
-    categorie  = request.session.get('categorie', None)            
-    vitesspro  = request.session.get('vitesspro', None)            
-    frequence  = request.session.get('frequence', None)            
-    profondeur  = request.session.get('profondeur', None)            
-    nivocnt  = request.session.get('nivocnt', None)            
+        nivpert = var
+    request.session['nivoperte'] = nivoperte    
+    # nivocnt  = request.session.get('nivocnt', None)            
     nivoperte  = request.session.get('nivoperte', None)            
+    # with open('nivocnt.txt', 'w') as mytextfile:
+    #     mytextfile.write(nivocnt)
+    with open('nivoperte.txt', 'w') as mytextfile:
+        mytextfile.write(nivpert)     
+        
     data= list(flatten(recup5))
+    with open('categorie.txt') as mytextfile:
+        categorie = mytextfile.read()
+
+    with open('vitesspro.txt') as mytextfile:
+            vitesspro = mytextfile.read()
+    with open('frequence.txt') as mytextfile:
+            frequence = mytextfile.read()
+    with open('profondeur.txt') as mytextfile:
+            profondeur = mytextfile.read()
+    with open('nivocnt.txt') as mytextfile:
+            nivocnt = mytextfile.read()
+    with open('nivoperte.txt') as mytextfile:
+        nivoperte = mytextfile.read()
+
+    datastor.append(categorie)
+    datastor.append(vitesspro)
+    datastor.append(frequence)
+    datastor.append(profondeur)
+    datastor.append(nivocnt)
+    datastor.append(nivoperte)
+    # print(datastor)
+    if len(dadat)<6 or '' in data:
+        data = datastor
+
     # print(data)
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -403,32 +451,30 @@ def simulation(request):
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
     # print("ok",nivocnt)
+    categorie2  = request.session.get('categorie', None)            
+    vitesspro2  = request.session.get('vitesspro', None)            
+    frequence2  = request.session.get('frequence', None)            
+    profondeur2  = request.session.get('profondeur', None)            
+    nivocnt2  = request.session.get('nivocnt', None)            
+    nivoperte2  = request.session.get('nivoperte', None)        
     data2 = [] 
-    data2.append(categorie)
-    data2.append(vitesspro)
-    data2.append(frequence)
-    data2.append(profondeur)
-    data2.append(nivocnt)
-    data2.append(nivoperte)
-    print(data)
-    if data == data2:
-        print("ok")
-        pass
-    else:
-        print("non")
-        data = data2    
-
-    print(data)
+    data2.append(categorie2)
+    data2.append(vitesspro2)
+    data2.append(frequence2)
+    data2.append(profondeur2)
+    data2.append(nivocnt2)
+    data2.append(nivoperte2)
     context={
         'recup':data,
-        'filename':filename,
-        'categorie':categorie,
-        'vitesspro': vitesspro,            
-        'frequence':frequence,          
-        'profondeur'  :profondeur,           
-        'nivocnt' : nivocnt,            
-        'nivoperte': nivoperte,
-        # 'data2':data2
+        # 'filename':filename,
+        # 'categorie':categorie,
+        # 'vitesspro': vitesspro,            
+        # 'frequence':frequence,          
+        # 'profondeur'  :profondeur,           
+        # 'nivocnt' : nivocnt,            
+        # 'nivoperte': nivoperte,
+        'data2':data2,
+        'datastor': datastor
     }
     return render (request, 'alerte/simulation.html', context) 
 
