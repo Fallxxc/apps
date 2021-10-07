@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %}{% load static %} stored{{ datastor}} <br> data {{ recup}} <br> data2
+{% extends 'base.html' %} {% block content %}{% load static %} <br>
 <div class="w3-row w3-border" style="margin: 40px; ">
     <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
         <h3> <b> Récapitulatif des modalités</b>
@@ -14,20 +14,23 @@
         </div><br>
         <div class="col-xs-12 col-sm-6 col-md-10 ">
             <div class="card ">
-                <div class="card-body text-center " style="height: 400px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br>
+                <div class="card-body text-center " style="height: 400px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if recup.0 %}
                     <h4 class="card-title "> <b> {{recup.0 }}</b> </h4>
+                    </h5>{% else %}{% if categorie %}
+                    <h4 class="card-title "> <b> {{ categorie }}</b> </h4>{% else %}
+                    <h4 class="card-title "> <b> &nbsp;</b> </h4> {% endif %}{% endif %}
 
                 </div>
             </div>
         </div><br>
 
-        <a href="{% url 'niveauPerte' %} ">
+        <a href="javascript:history.back()">
 
-            <div class="col-xs-12 col-sm-6 col-md-10" style="margin-top: 10%;">
-                <div class="card">
+            <div class="col-xs-12 col-sm-6 col-md-10 " style="margin-top: 10%; ">
+                <div class="card ">
 
-                    <button type="button" class="btn btn-outline-primary">
-                    <div class="card-body text-center;" style="font-size: 25px;">Précédent</div>
+                    <button type="button " class="btn btn-outline-primary ">
+                    <div class="card-body text-center; " style="font-size: 25px; ">Précédent</div>
                 </button>
 
                 </div>
@@ -37,42 +40,68 @@
     </div>
     <div>
 
-        <div class="w3-twothird w3-container" style="margin-top: 20px;width: 60%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);">
+        <div class="w3-twothird w3-container " style="margin-top: 20px;width: 60%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
 
-            <div class="col-xs-12 col-sm-6 col-md-12">
-                <div class="card" style="margin-right: 4%;margin-left: 3%;margin-top: 1%;">
-                    <div class="card-body text-center" style="background-color: white;  height: 70px;">
+            <div class="col-xs-12 col-sm-6 col-md-12 ">
+                <div class="card " style="margin-right: 4%;margin-left: 3%;margin-top: 1%; ">
+                    <div class="card-body text-center " style="background-color: white; height: 70px; ">
                         <h3 class="card-title "> <b> Modalités </b> </h3>
                     </div>
                 </div>
             </div>
             <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
                 <div>
-                    <div class="card-body">
+                    <div class="card-body ">
                         <!-- categorie -->
-                        <p class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Catatrophe:  {{ data2.0 }}</button>
-                            <!--  vitess-->
-                            <p class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Catatrophe:  {{ datastor.0 }}</button>
-                                <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de propagation: {{ data2.1}}</button></p>
-                                <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Vitesse de propagation: {{ datastor.1}}</button></p>
-                                <!-- frequence -->
-                                <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ data2.2}}</button> </p>
-                                <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Fréquence: {{ datastor.2}}</button> </p>
-                                <!-- profondeur -->
-                                <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{data2.3 }}</button></p>
+                        {% if recup.0 %}
+                        <p class="card-title "><button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe:  {{ recup.0 }}</button>
+                        </p>{% else %}{% if categorie %}
+                        <p class="card-title "><button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe:  {{ categorie }}</button>
+                        </p> {% else %}
+                        <p class="card-title ">
+                            <a href="{% url 'cate' %} "></a> <button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe: Merci de refaire un choix </button>
+                        </p>{% endif %}{% endif %}
 
-                                <p class="card-text"><button type="button" class="btn btn-warning btn-lg btn-radius">Profondeur: {{datastor.3 }}</button></p>
-                                <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ data2.4}}</button></p>
-                                <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Niveau de conrôle: {{ datastor.4}}</button></p>
-                                <!--  nivo perte-->
-                                <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ data2.5}}</button></p>
-                                <p class="card-text"><button type="button" class="btn btn-dark btn-lg btn-radius">Niveau de perte: {{ datastor.5}}</button></p>
+                        <!--  vitess-->
+                        {% if recup.1 %}
+                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse de propagation: {{ recup.1}}</button></p>{% else %}{% if vitesspro %}
+                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse de propagation: {{vitesspro }}</button></p>{% else %}
+                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse propagation&nbsp;</button></p>{% endif %}{% endif %}
+
+                        <!-- frequence -->
+                        {% if recup.2 %}
+                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence: {{ recup.2}}</button> </p>{% else %}{% if frequence %}
+                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence: {{frequence }}</button> </p>{% else %}
+                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence&nbsp;</button> </p>{% endif %}{% endif %}
+
+                        <!-- profondeur -->
+                        {% if recup.3 %}
+
+                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur: {{recup.3 }}</button></p>{% else %}{% if profondeur %}
+                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur: {{profondeur }}</button></p>{% else %}
+                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur&nbsp;</button></p>{% endif %}{% endif %}
+                        <!-- nivo controle -->
+                        {% if recup.4 %}
+
+                        <p class="card-text "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle: {{ recup.4}}</button></p>{% else %}{% if nivocnt %}
+                        <p class="card-text "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle: {{ nivocnt}}</button></p>{% else %}
+                        <p class="card-text ">
+                            <a href="{% url 'niveauControle' %} "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle&nbsp;</button></a>
+                        </p>{% endif %}{% endif %}
+
+                        <!--  nivo perte-->
+                        {% if recup.5 %}
+                        <p class="card-text "><button type="button " class="btn btn-dark btn-lg btn-radius ">Niveau de perte: {{ recup.5}}</button></p>{% else %}{% if nivoperte %}
+                        <p class="card-text "><button type="button " class="btn btn-dark btn-lg btn-radius ">Niveau de perte: {{ nivoperte}}</button></p>{% else %}
+                        <p class="card-text ">
+                            <a href="{% url 'niveauPerte' %} "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de perte&nbsp;</button></a></p>{% endif %}{% endif %}
                     </div>
 
-                    <div style="text-align: center;padding: 20px; font-size: 20px;">
+                    <div style="text-align: center;padding: 20px; font-size: 20px; ">
                         {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
-                        <p> {{ filename }} </p>{% else %}
-                        <button type="button" class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                        <p> {{ filename }} </p> <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                            <a href="{% url 'cate' %} ">Recommencer la simulation </a></button>{% else %}
+                        <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
                             <a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
                     </div>
                 </div>
