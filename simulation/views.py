@@ -184,6 +184,18 @@ def simulation(request):
     nivocnt  = request.session.get('nivocnt', None)            
     nivoperte  = request.session.get('nivoperte', None)            
     data= list(flatten(recup5))
+    data2 = [] 
+    data2.append(categorie)
+    data2.append(vitesspro)
+    data2.append(frequence)
+    data2.append(profondeur)
+    data2.append(nivocnt)
+    data2.append(nivoperte)
+
+    if data == data2:
+        pass
+    elif len(data)< len(data2) or '' in data:
+        data = data2    
 
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -406,17 +418,6 @@ def simulation(request):
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
     # print("ok",nivocnt)
-    data2 = [] 
-    data2.append(categorie)
-    data2.append(vitesspro)
-    data2.append(frequence)
-    data2.append(profondeur)
-    data2.append(nivocnt)
-    data2.append(nivoperte)
-    if data == data2:
-        pass
-    else:
-        data = data2    
     context={
         'recup':data,
         'filename':filename,
@@ -505,7 +506,18 @@ def simulationattack(request):
     natinf  = request.session.get('natinf', None)        
     paruinf  = request.session.get('paruinf', None)        
     perceptsup  = request.session.get('perceptsup', None)        
-    rebondinf  = request.session.get('rebondinf', None)        
+    rebondinf  = request.session.get('rebondinf', None)   
+    data2 = [] 
+    data2.append(natinf)
+    data2.append(paruinf)
+    data2.append(perceptsup)
+    data2.append(rebondinf)
+
+    if data == data2:
+        pass
+    else:
+        data = data2    
+     
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"]      
