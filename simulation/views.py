@@ -192,7 +192,7 @@ def simulation(request):
     data2.append(nivocnt)
     data2.append(nivoperte)
 
-    if data == data2:
+    if data == data2 or len(data)>len(data2):
         pass
     elif len(data)< len(data2) or '' in data:
         data = data2    
@@ -417,7 +417,6 @@ def simulation(request):
         filename = 'SECUR20.pdf'
     else:
         filename = "Aucune fiche de décision ne correspond aux choix effectués"
-    # print("ok",nivocnt)
     context={
         'recup':data,
         'filename':filename,
@@ -484,7 +483,6 @@ def Rebondinfo(request):#3
     request.session['perceptsup'] = perceptsup   
     context={
         'rebond':rebond,
-        # 'nat':nat
     }
     return render(request,'attaque/rebond.html', context)
 
@@ -513,9 +511,9 @@ def simulationattack(request):
     data2.append(perceptsup)
     data2.append(rebondinf)
 
-    if data == data2:
+    if data == data2 or len(data)>len(data2):
         pass
-    else:
+    elif len(data)< len(data2) or '' in data:
         data = data2    
      
     data= list(flatten(recup5))
@@ -648,10 +646,6 @@ def simulationattack(request):
         action="Capitalisation sur image (Exemple ..."            
     else:
         action = "Aucun plan d'action ne correspond aux choix effectués"
-    for i in range(0, len(data)):
-        if data[i] == None:
-            data[i]='Aucun choix'
-    # data2 = data 
 
     context={
         'recup':data,
