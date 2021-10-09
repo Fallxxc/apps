@@ -192,53 +192,21 @@ def simulation(request):
     data2.append(nivocnt)
     data2.append(nivoperte)
 
-    if data[0]:
-        if data[0]=='':
-            data[0]=data2[0]
-    else:
-        data[0]=data2[0]
 
-    if data[1]:
-        if data[1]=='':
-            data[1]=data2[1]
-    else:
-        data[1]=data2[1]
-
-
-    if data[2]:
-        if data[2]=='':
-            data[2]=data2[2]
-    else:
-        data[2]=data2[2]
-
-
-    if data[3]:
-        if data[3]=='':
-            data[3]=data2[3]
-    else:
-        data[3]=data2[3]
-    if data[4]:
-        if data[4]=='':
-            data[4]=data2[4]
-    else:
-        data[4]=data2[4]
-
-    if data[5]:
-        if data[5]=='':
-            data[5]=data2[5]
-    else:
-        data[5]=data2[5]
-
-
-
-
-
-
-
-    if data == data2 or len(data)>len(data2):
-        pass
-    elif len(data)< len(data2) or '' in data:
-        data = data2    
+    listes_manq = [] 
+    data= list(flatten(recup5))
+    if len(data)<6 or '' in data: 
+        if len(data2)==6 and '' not in data2:
+                data = data2
+        elif len(data2)==6 and data2[5]=='':
+            for i in range(0,2):
+                listes_manq.append(data2[i])
+            if data[5] and data[5]!='':
+                x =  data[5]    
+                data = listes_manq   
+                data.append(x)
+            else:
+                data = data2     
 
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -554,7 +522,6 @@ def simulationattack(request):
     data2.append(perceptsup)
     data2.append(rebondinf)
 
-      
     listes_manq = [] 
     data= list(flatten(recup5))
     if len(data)<4 or '' in data: 
