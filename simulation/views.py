@@ -519,7 +519,6 @@ def simulationattack(request):
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"]      
-    
     Action3 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"RAS"]	         
     Action4 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"Effectif"]    	 
     Action5 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "RAS"]       	 

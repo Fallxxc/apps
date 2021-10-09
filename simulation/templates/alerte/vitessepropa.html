@@ -1,69 +1,91 @@
 {% extends 'base.html' %} {% block content %}
-
-<div class="w3-row w3-border" style="margin: 40px; ">
-    <div class="w3-third w3-container" style="margin-top: 20px; margin-bottom: 20px; ">
+<div class="w3-row w3-border">
+    <div class="w3-third w3-container" style="margin-top: 20px; margin-bottom: 20px;">
         <div class="col-xs-12 col-sm-6 col-md-10">
             <div class="card">
                 <div class="card-body text-center" style="height: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px; margin-top: 20px;">
-                    <h4 class="card-title "> <b> Vitesse de propagation</b> </h4>
+                    <h4 class="card-title"> <b> Vitesse de propagation</b> </h4>
                 </div>
             </div>
         </div><br>
-        <div class="col-xs-12 col-sm-6 col-md-10 ">
-            <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br>
-                    <h4 class="card-title "> <b> Rapide</b> </h4>
+        <div class="col-xs-12 col-sm-6 col-md-10">
+            <div class="card">
+                <div class="card-body text-center" style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px"> <br><br>
+                    <h4 class="card-title"> <b> Rapide</b> </h4>
                 </div>
             </div>
         </div><br>
-        <div class="col-xs-12 col-sm-6 col-md-10 ">
-            <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "><br><br>
-                    <h4 class="card-title "> <b> Maîtrisée</b></h4>
+        <div class="col-xs-12 col-sm-6 col-md-10">
+            <div class="card">
+                <div class="card-body text-center" style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px"><br><br>
+                    <h4 class="card-title"> <b> Maîtrisée</b></h4>
                 </div>
             </div>
         </div><br>
-        <div class="col-xs-12 col-sm-6 col-md-10 ">
-            <div class="card ">
-                <div class="card-body text-center " style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px; "> <br><br>
-                    <h4 class="card-title "> <b> Lente</b> </h4>
+        <div class="col-xs-12 col-sm-6 col-md-10">
+            <div class="card">
+                <div class="card-body text-center" style="height: 180px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px;"> <br><br>
+                    <h4 class="card-title"> <b> Lente</b> </h4>
                 </div>
             </div>
         </div>
     </div>
-    <div class="w3-twothird w3-container w3-white " style="margin-top: 100px;width: 55%;border-radius: 2%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);">
-        <div style="background-color: white; width: 90%; height: 70%; margin: 5%; ">
-            <div>
-                <span class="align-baseline " style="margin-top: 20px; margin-left: 2%; margin-right: 20%; font-size: 20px; "> <b> Vitesse de propagation</b></span>
-                <span class="align-baseline "><button class=" btn btn-outline-warning " type="submit " name="save " value="save " id="toggle" style="margin-top: 20px; font-size: 15px;"> Continue simulation</button></span>
-            </div>
-            <div id="third" style="display: none;">
-                <hr style="height:2px; width:95%; border-width:0;margin: 2%; color:rgb(19, 18, 18); background-color:rgb(10, 10, 10) ">
-                <div class="question ml-sm-5 pl-sm-5 pt-2">
-                    <form method="POST" action="{% url 'frequence' %} ">
-                        {% csrf_token %}
-                        <div style="margin-left: 10%; ">
-                            {% for i in vitessePropagation %}
-                            <label class="options"> {{ i }}<input type="radio" name="vitessePropagation" value="{{i}}" required>
-                                <span class="checkmark "></span> </label><br><br> {% endfor %}
-                        </div>
-                        <hr style="height:2px; width:100%; border-width:0; color:rgb(19, 18, 18); background-color:rgb(10, 10, 10); ; ">
-
-                        <div class="d-flex align-items-center pt-3 ">
-                            <div class="ml-auto mr-sm-5 ">
-                                <button class="btn btn-outline-success" type="submit" value="Submit" name="submit" id="checked">Suivant</button>
+    <table class="container">
+        <tr>
+            <td class="right">
+                <div style="margin-bottom: 30px; margin-top: 20px;">
+                    <span class="align-baseline" style="margin-top: 30px; margin-left:20px; margin-right: 55%; font-size: 20px;"> <b> Vitesse de propagation</b></span>
+                    <span class="align-baseline"><button class=" btn btn-outline-warning" type="submit" name="save" value="save" id="toggle" style="margin-top: 20px; font-size: 15px;"> Continue simulation</button></span>
+                </div>
+                <div id="third" style="display: none;">
+                    <hr>
+                    <div>
+                        <form method="POST" action="{% url 'frequence' %}">
+                            {% csrf_token %}
+                            <div style="margin-left: 20%; font-size: 18px;">
+                                {% for i in vitessePropagation %}
+                                <b><label class="options"> {{ i }}<input type="radio" name="vitessePropagation" value="{{i}}" required>
+                                <span class="checkmark"></span> </label></b><br><br> {% endfor %}
                             </div>
-                        </div>
-
-                    </form>
-                    <span class="align-baseline" style="margin-top: 30px; margin-left: 10%; margin-right: 70%; padding-bottom: 20px; ">
-                    <a href="javascript:history.back()">
-                        <button type="button"  class="btn btn-outline-primary">Précédent</button>
-                   </a>
-                    </span>
+                            <hr>
+                            <div class="d-flex align-items-center" id="pre_sui">
+                                <div class="ml-auto mr-sm-5">
+                                    <a href="javascript:history.back()"><button type="button" class="btn btn-outline-primary">Précédent</button></a>
+                                    <button class="btn btn-outline-success" type="submit" value="Submit" name="submit" id="checked">Suivant</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
+            </td>
+        </tr>
+    </table>
 </div>
-{% endblock content %}
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        margin-top: 30px;
+    }
+    
+    .right {
+        height: 100%;
+        background-color: white;
+        border-radius: 2%;
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    }
+    
+    hr {
+        height: 2px;
+        width: 90%;
+        border-width: 0;
+        color: rgb(19, 18, 18);
+        background-color: rgb(10, 10, 10);
+        margin-left: 2%;
+    }
+    
+    #pre_sui {
+        margin-bottom: 20px;
+        margin-right: 60px;
+    }
+</style>{% endblock content %}

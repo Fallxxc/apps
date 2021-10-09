@@ -99,8 +99,10 @@
 
                     <div style="text-align: center;padding: 20px; font-size: 20px; ">
                         {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
-                        <p> {{ filename }} </p> <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                            <a href="{% url 'cate' %} ">Recommencer la simulation </a></button>{% else %}
+                        <p> {{ filename }} </p>
+                        <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Niveau de perte</b></p>
+                        <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                            <a href="{% url 'cate' %} ">Recommencer la simulation </button></a>{% else %}
                         <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
                             <a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
                     </div>
