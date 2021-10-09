@@ -191,6 +191,49 @@ def simulation(request):
     data2.append(profondeur)
     data2.append(nivocnt)
     data2.append(nivoperte)
+    
+    if data[0]:
+        if data[0]=='':
+            data[0]=data2[0]
+    else:
+        data[0]=data2[0]
+
+    if data[1]:
+        if data[1]=='':
+            data[1]=data2[1]
+    else:
+        data[1]=data2[1]
+
+
+    if data[2]:
+        if data[2]=='':
+            data[2]=data2[2]
+    else:
+        data[2]=data2[2]
+
+
+    if data[3]:
+        if data[3]=='':
+            data[3]=data2[3]
+    else:
+        data[3]=data2[3]
+    if data[4]:
+        if data[4]=='':
+            data[4]=data2[4]
+    else:
+        data[4]=data2[4]
+
+    if data[5]:
+        if data[5]=='':
+            data[5]=data2[5]
+    else:
+        data[5]=data2[5]
+
+
+
+
+
+
 
     if data == data2 or len(data)>len(data2):
         pass
@@ -511,10 +554,37 @@ def simulationattack(request):
     data2.append(perceptsup)
     data2.append(rebondinf)
 
-    if data == data2 or len(data)>len(data2):
-        pass
-    elif len(data)< len(data2) or '' in data:
-        data = data2    
+    if data[0]:
+        if data[0]=='':
+           data[0]=data2[0]
+    else:
+        data[0]=data2[0]
+
+    if data[1]:
+        if data[1]=='':
+            data[1]=data2[1]
+    else:
+        data[1]=data2[1]
+
+
+    if data[2]:
+        if data[2]=='':
+            data[2]=data2[2]
+    else:
+        data[2]=data2[2]
+
+
+    if data[3]:
+        if data[3]=='':
+            data[3]=data2[3]
+    else:
+        data[3]=data2[3]
+
+
+    # if data == data2 or len(data)>len(data2):
+    #     pass
+    # elif len(data)< len(data2) or '' in data:
+    #     data = data2    
      
     data= list(flatten(recup5))
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
