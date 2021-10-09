@@ -559,8 +559,8 @@ def simulationattack(request):
     data= list(flatten(recup5))
     if len(data)<4 or '' in data: 
         if len(data2)==4 and '' not in data2:
-            data = data2
-        elif len(data2)==3 or data2[3]=='':
+                data = data2
+        elif len(data2)==4 and data2[3]=='':
             for i in range(0,2):
                 listes_manq.append(data2[i])
             if data[3] and data[3]!='':
@@ -568,51 +568,13 @@ def simulationattack(request):
                 data = listes_manq   
                 data.append(x)
             else:
-                pass     
-            
-        else:    
-            if data[0]:
-                if data[0]=='':
-                    if data2[0]:
-                        data[0]=data2[0]
-                    else:
-                        pass    
-            else:
-                data.append(data2[0]) 
-
-            if data[1]:
-                if data[1]=='':
-                    if data2[1]:
-                        data[1] = data2[1]
-                    else:
-                        pass    
-            else:
-                data.append(data2[1])
-
-            if data[2]:
-                if data[2]=='':
-                    if data2[2]:
-                        data[2]=data2[2]
-                    else:
-                        pass    
-            else:
-                data.append(data2[2])
-
-            if data[3]:
-                if data[3]=='':
-                    if data2[3]:
-                        data[3]=data2[3]
-                    else:
-                        pass    
-            else:
-                data.append(data2[3])
-
-
-    Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   
-    Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"]      
-    Action3 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"RAS"]	         
-    Action4 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"Effectif"]    	 
-    Action5 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "RAS"]       	 
+                data = data2     
+        
+    Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   # -
+    Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"] #     
+    Action3 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"RAS"]	    #-     
+    Action4 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"Effectif"] #-   	 
+    Action5 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "RAS"]       #	 
     Action6 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "Effectif"]    	 
     Action7 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"RAS"]       	 
     Action8 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"Effectif"]    	 
@@ -736,6 +698,9 @@ def simulationattack(request):
         action="Capitalisation sur image (Exemple ..."            
     else:
         action = "Aucun plan d'action ne correspond aux choix effectués"
+    print('aucun prise', data)
+
+    print('aucun prise', data)
 
     context={
         'recup':data,
