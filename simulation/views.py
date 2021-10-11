@@ -172,6 +172,7 @@ def simulation(request):
     recup5.append(profond)
     recup5.append(niveaucon)
     recup5.append(nivopert)
+    a = nivopert
     if request.method == 'POST':
         nivoperte  = request.POST.get('niveauPerte')
         var  = request.POST.get('niveauPerte')
@@ -191,23 +192,32 @@ def simulation(request):
     data2.append(profondeur)
     data2.append(nivocnt)
     data2.append(nivoperte)
-
+    a = recup5[-1]
 
     listes_manq = [] 
     data= list(flatten(recup5))
-    if len(data)<6 or '' in data: 
-        if len(data2)==6 and '' not in data2:
-                data = data2
-        elif len(data2)==6 and data2[5]=='':
-            for i in range(0,2):
-                listes_manq.append(data2[i])
-            if data[5] and data[5]!='':
-                x =  data[5]    
-                data = listes_manq   
-                data.append(x)
-            else:
-                data = data2     
-
+    if len(data)<len(data2):
+        data = data2
+    if data != data2 and '' not in data2 and len(data2)>len(data):
+        data = data2    
+    if len(data)==len(data2) and '' not in data2:
+        data = data2
+        
+    # if len(data)<len(data2):
+    #     data = data2
+    # if '' in data: 
+    #     if len(data2)==6 and '' not in data2:
+    #             data = data2
+    #     elif len(data2)==6 and data2[5]=='':
+    #         for i in range(0,4):
+    #             listes_manq.append(data2[i])
+    #         if data[5] and data[5]!='':
+    #             x =  data[5]     
+    #             data = listes_manq   
+    #             data.append(x)
+    #         else:
+    #             data = data2     
+    
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit3 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Non récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -524,19 +534,27 @@ def simulationattack(request):
 
     listes_manq = [] 
     data= list(flatten(recup5))
-    if len(data)<4 or '' in data: 
-        if len(data2)==4 and '' not in data2:
-                data = data2
-        elif len(data2)==4 and data2[3]=='':
-            for i in range(0,2):
-                listes_manq.append(data2[i])
-            if data[3] and data[3]!='':
-                x =  data[3]    
-                data = listes_manq   
-                data.append(x)
-            else:
-                data = data2     
-        
+   
+    if len(data)<len(data2):
+        data = data2
+    if data != data2 and '' not in data2 and len(data2)>len(data):
+        data = data2    
+    if len(data)==len(data2) and '' not in data2:
+        data = data2
+    
+    # if len(data)<4 or '' in data: 
+    #     if len(data2)==4 and '' not in data2:
+    #             data = data2
+    #     elif len(data2)==4 and data2[3]=='' and len(data)==3:
+    #         for i in range(0,2):
+    #             listes_manq.append(data2[i])
+    #         if data[3] and data[3]!='':
+    #             x =  data[3]    
+    #             data = listes_manq   
+    #             data.append(x)
+    #         else:
+    #             data = data2     
+    # print(len(data)len(data2))    
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   # -
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"] #     
     Action3 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"RAS"]	    #-     
@@ -665,9 +683,6 @@ def simulationattack(request):
         action="Capitalisation sur image (Exemple ..."            
     else:
         action = "Aucun plan d'action ne correspond aux choix effectués"
-    print('aucun prise', data)
-
-    print('aucun prise', data)
 
     context={
         'recup':data,
