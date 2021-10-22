@@ -108,28 +108,20 @@
                 <!-- nivo controle -->
                 {% if recup.4 %}
                 <p class="card-text">Niveau de conrôle: {{ recup.4}} </p>{% else %}
-                <p class="card-text">
-                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-2)">Niveau de conrôle:refaire un choix</button>
-                </p>{% endif %}
+                <p class="card-text"><button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-2)">Niveau de conrôle:refaire un choix</button></p>{% endif %}
 
                 <!--  nivo perte-->
                 {% if recup.5 %}
-                <p class="card-text">Niveau de perte: {{ recup.5}}</p>
-                {% else %}
-                <p class="card-text">
-                    <a href="javascript:history.back()"><button type="button" class="btn  btn-lg btn-radius ">Niveau de perte</button></a>
-                </p>{% endif %}
+                <p class="card-text">Niveau de perte: {{ recup.5}} </p>{% else %}
+                <p class="card-text"><a href="javascript:history.back()"><button type="button" class="btn  btn-lg btn-radius ">Niveau de perte: refaire un choix</button></a></p>{% endif %}
             </div>
 
             <div style="text-align: center;padding: 20px; font-size: 20px; ">
                 {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
-                <p> {{ filename }} </p>{% if '' in data2 %}
-                <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Niveau de perte</b></p>{% endif %}
-                <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                            <a href="{% url 'cate' %} ">Recommencer</button></a>{% else %}
-                <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                        <!-- <iframe src="{% static filename %} " style="width:70%; height:100% " frameborder="0 "></iframe> -->
-                            <a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
+                <p> {{ filename }}</p>{% if '' in data2 %}
+                <p>Si vous avez rafraichie la page merci de reprendre l'étape <b>Niveau de perte</b></p>{% endif %}
+                <button type="button" class="btn btn-outline-dark btn-lg btn-radius" style="color:black;"><a href="{% url 'cate' %} ">Recommencer</button></a>{% else %}
+                <button type="button" class="btn btn-outline-dark btn-lg btn-radius" style="color:black;"><a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
             </div>
         </div>
     </div>

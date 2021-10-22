@@ -137,13 +137,13 @@ def niveauPerte(request):
     return render(request,'alerte/nivoperte.html', context)
 
 
-def flatten(lis):
-     for item in lis:
-         if isinstance(item, Iterable) and not isinstance(item, str):
-             for x in flatten(item):
-                 yield x
-         else:        
-             yield item
+# def flatten(lis):
+#      for item in lis:
+#          if isinstance(item, Iterable) and not isinstance(item, str):
+#              for x in flatten(item):
+#                  yield x
+#          else:        
+#              yield item
 
 
 @login_required(login_url = 'login')    
@@ -407,7 +407,7 @@ def simulation(request):
 
 
                 ############################################################################
-                #                            LA GESTION DES ATTAQUE                        #
+                #                            LA GESTION DES ATTAQUES                       #
                 ############################################################################    
 @login_required(login_url = 'login')    
 def Natureinformation(request): 
