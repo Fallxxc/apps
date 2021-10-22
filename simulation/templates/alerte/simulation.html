@@ -86,35 +86,36 @@
                 <p class="card-text">Catatrophe: {{ recup.0 }} </p>
                 {% else %}
                 <p class="card-text">
-                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-4)">Catatrophe </button>
+                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-6)">Catatrophe:refaire un choix </button>
                 </p>{% endif %}
 
                 <!--  vitess-->{% if recup.1 %}
                 <p class="card-text">Vitesse de propagation: {{ recup.1}} </p>{% else %}
-                <p class="card-text">Vitesse propagation&nbsp; </p>{% endif %}
+                <p class="card-text"><button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-5)">Vitesse propagation:refaire un choix</button></p>{% endif %}
 
 
                 <!-- frequence -->
                 {% if recup.2 %}
                 <p class="card-text">Fréquence: {{ recup.2}} </p>{% else %}
-                <p class="card-text"> <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-3)"> Fréquence</button> </p>{% endif %}
+                <p class="card-text"> <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-4)"> Fréquence:refaire un choix</button> </p>{% endif %}
 
 
                 <!-- profondeur -->
                 {% if recup.3 %}
                 <p class="card-text">Profondeur: {{recup.3 }} </p>{% else %}
-                <p class="card-text">Profondeur&nbsp; </p>{% endif %}
+                <p class="card-text"><button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-3)">Profondeur:refaire un choix</button></p>{% endif %}
 
                 <!-- nivo controle -->
                 {% if recup.4 %}
                 <p class="card-text">Niveau de conrôle: {{ recup.4}} </p>{% else %}
                 <p class="card-text">
-                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-2)">Niveau de conrôle</button>
+                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-2)">Niveau de conrôle:refaire un choix</button>
                 </p>{% endif %}
 
                 <!--  nivo perte-->
                 {% if recup.5 %}
-                <p class="card-text">Niveau de perte: {{ recup.5}}</p>{% else %}
+                <p class="card-text">Niveau de perte: {{ recup.5}}</p>
+                {% else %}
                 <p class="card-text">
                     <a href="javascript:history.back()"><button type="button" class="btn  btn-lg btn-radius ">Niveau de perte</button></a>
                 </p>{% endif %}
