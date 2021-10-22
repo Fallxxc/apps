@@ -441,6 +441,8 @@ def Perceptsupport(request): #2
         "percepsupport":percepsupport}
     return render(request,'attaque/perceptionsupport.html', context)
 
+
+
 @login_required(login_url = 'login')    
 def Rebondinfo(request):#3
     perceptsup = ''
@@ -452,6 +454,8 @@ def Rebondinfo(request):#3
         'rebond':rebond,
     }
     return render(request,'attaque/rebond.html', context)
+
+
 
 @login_required(login_url = 'login')    
 def simulationattack(request):
