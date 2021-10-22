@@ -1,114 +1,145 @@
-{% extends 'base.html' %} {% block content %}{% load static %}data2:{{data2 }} <br> data:{{ recup }}
-<div class="w3-row w3-border" style="margin: 40px; ">
-    <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
-        <h3> <b> Récapitulatif des modalités</b>
-        </h3>
-    </div>
-    <div class="w3-third w3-container" style="margin-top: 20px; margin-bottom: 20px; ">
-        <div class="col-xs-12 col-sm-6 col-md-10">
-            <div class="card">
-                <div class="card-body text-center" style="height: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px; margin-top: 20px;">
-                    <h4 class="card-title "> <b> Nature de la catastrophe </b> </h4>
-                </div>
-            </div>
-        </div><br>
-        <div class="col-xs-12 col-sm-6 col-md-10 ">
-            <div class="card ">
-                <div class="card-body text-center " style="height: 400px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px "> <br><br> <br><br> <br><br><br><br> {% if recup.0 %}
-                    <h4 class="card-title "> <b> {{recup.0 }}</b> </h4>
-                    </h5>{% else %}{% if categorie %}
-                    <h4 class="card-title "> <b> {{ categorie }}</b> </h4>{% else %}
-                    <h4 class="card-title "> <b> &nbsp;</b> </h4> {% endif %}{% endif %}
-
-                </div>
-            </div>
-        </div><br>
-
-        <a href="javascript:history.back()">
-
-            <div class="col-xs-12 col-sm-6 col-md-10 " style="margin-top: 10%; ">
-                <div class="card ">
-
-                    <button type="button " class="btn btn-outline-primary ">
-                    <div class="card-body text-center; " style="font-size: 25px; ">Précédent</div>
-                </button>
-
-                </div>
-            </div>
-        </a>
-        <br>
-    </div>
-    <div>
-
-        <div class="w3-twothird w3-container " style="margin-top: 20px;width: 60%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
-
-            <div class="col-xs-12 col-sm-6 col-md-12 ">
-                <div class="card " style="margin-right: 4%;margin-left: 3%;margin-top: 1%; ">
-                    <div class="card-body text-center " style="background-color: white; height: 70px; ">
-                        <h3 class="card-title "> <b> Modalités </b> </h3>
+{% extends 'base.html' %} {% block content %}{% load static %}recup:{{ recup }}
+<br>
+<div class="row" style="margin-left: 10%; margin-right: 2%;">
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Naturelle</h5>
+                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
                     </div>
                 </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                </p>
             </div>
-            <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
-                <div>
-                    <div class="card-body ">
-                        <!-- categorie -->
-                        {% if recup.0 %}
-                        <p class="card-title "><button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe:  {{ recup.0 }}</button>
-                        </p>{% else %}{% if categorie %}
-                        <p class="card-title "><button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe:  {{ categorie }}</button>
-                        </p> {% else %}
-                        <p class="card-title ">
-                            <a href="{% url 'cate' %} "></a> <button type="button " class="btn btn-primary btn-lg btn-radius ">Catatrophe: Merci de refaire un choix </button>
-                        </p>{% endif %}{% endif %}
-
-                        <!--  vitess-->
-                        {% if recup.1 %}
-                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse de propagation: {{ recup.1}}</button></p>{% else %}{% if vitesspro %}
-                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse de propagation: {{vitesspro }}</button></p>{% else %}
-                        <p class="card-text "><button type="button " class="btn btn-secondary btn-lg btn-radius ">Vitesse propagation&nbsp;</button></p>{% endif %}{% endif %}
-
-                        <!-- frequence -->
-                        {% if recup.2 %}
-                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence: {{ recup.2}}</button> </p>{% else %}{% if frequence %}
-                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence: {{frequence }}</button> </p>{% else %}
-                        <p class="card-text "><button type="button " class="btn btn-danger btn-lg btn-radius ">Fréquence&nbsp;</button> </p>{% endif %}{% endif %}
-
-                        <!-- profondeur -->
-                        {% if recup.3 %}
-
-                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur: {{recup.3 }}</button></p>{% else %}{% if profondeur %}
-                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur: {{profondeur }}</button></p>{% else %}
-                        <p class="card-text "><button type="button " class="btn btn-warning btn-lg btn-radius ">Profondeur&nbsp;</button></p>{% endif %}{% endif %}
-                        <!-- nivo controle -->
-                        {% if recup.4 %}
-
-                        <p class="card-text "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle: {{ recup.4}}</button></p>{% else %}{% if nivocnt %}
-                        <p class="card-text "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle: {{ nivocnt}}</button></p>{% else %}
-                        <p class="card-text ">
-                            <a href="{% url 'niveauControle' %} "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de conrôle&nbsp;</button></a>
-                        </p>{% endif %}{% endif %}
-
-                        <!--  nivo perte-->
-                        {% if recup.5 %}
-                        <p class="card-text "><button type="button " class="btn btn-dark btn-lg btn-radius ">Niveau de perte: {{ recup.5}}</button></p>{% else %}{% if nivoperte %}
-                        <p class="card-text "><button type="button " class="btn btn-dark btn-lg btn-radius ">Niveau de perte: {{ nivoperte}}</button></p>{% else %}
-                        <p class="card-text ">
-                            <a href="{% url 'niveauPerte' %} "><button type="button " class="btn btn-info btn-lg btn-radius ">Niveau de perte&nbsp;</button></a></p>{% endif %}{% endif %}
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Sanitaire</h5>
+                        <span class="h2 font-weight-bold mb-0">2,356</span>
                     </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last week</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Sécuritaire</h5>
+                        <span class="h2 font-weight-bold mb-0">924</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                    <span class="text-nowrap">Since yesterday</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-2 col-lg-4">
+        <a href="javascript:history.back()"><button type="button" class="btn btn-outline-primary" style="margin: 20%; font-size: 20px;">Précédent</button></a>
+    </div>
+</div>
 
-                    <div style="text-align: center;padding: 20px; font-size: 20px; ">
-                        {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
-                        <p> {{ filename }} </p>
-                        <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Niveau de perte</b></p>
-                        <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                            <a href="{% url 'cate' %} ">Recommencer la simulation </button></a>{% else %}
-                        <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+<div class="w3-twothird w3-container " style="margin-top: 20px;width: 80%; margin-left: 10%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
+
+    <div class="col-xs-12 col-sm-6 col-md-12 ">
+        <div class="card" style="margin-right: 4%;margin-left: 3%;margin-top: 1%; ">
+            <div class="card-body text-center " style="background-color: white; height: 70px; ">
+                <h3 class="card-title "> <b> Modalités </b> </h3>
+            </div>
+        </div>
+    </div><br>
+    <div style="background-color: white; width: 100%; border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
+        <div>
+            <div class="card-body">
+                <!-- categorie -->
+                {% if recup.0 %}
+                <p class="card-text">Catatrophe: {{ recup.0 }} </p>
+                {% else %}
+                <p class="card-text">
+                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-4)">Catatrophe </button>
+                </p>{% endif %}
+
+                <!--  vitess-->{% if recup.1 %}
+                <p class="card-text">Vitesse de propagation: {{ recup.1}} </p>{% else %}
+                <p class="card-text">Vitesse propagation&nbsp; </p>{% endif %}
+
+
+                <!-- frequence -->
+                {% if recup.2 %}
+                <p class="card-text">Fréquence: {{ recup.2}} </p>{% else %}
+                <p class="card-text"> <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-3)"> Fréquence</button> </p>{% endif %}
+
+
+                <!-- profondeur -->
+                {% if recup.3 %}
+                <p class="card-text">Profondeur: {{recup.3 }} </p>{% else %}
+                <p class="card-text">Profondeur&nbsp; </p>{% endif %}
+
+                <!-- nivo controle -->
+                {% if recup.4 %}
+                <p class="card-text">Niveau de conrôle: {{ recup.4}} </p>{% else %}
+                <p class="card-text">
+                    <button type="button" class="btn  btn-lg btn-radius" onclick="window.history.go(-2)">Niveau de conrôle</button>
+                </p>{% endif %}
+
+                <!--  nivo perte-->
+                {% if recup.5 %}
+                <p class="card-text">Niveau de perte: {{ recup.5}}</p>{% else %}
+                <p class="card-text">
+                    <a href="javascript:history.back()"><button type="button" class="btn  btn-lg btn-radius ">Niveau de perte</button></a>
+                </p>{% endif %}
+            </div>
+
+            <div style="text-align: center;padding: 20px; font-size: 20px; ">
+                {% if "Aucune fiche de décision ne correspond aux choix effectués" in filename %}
+                <p> {{ filename }} </p>{% if '' in data2 %}
+                <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Niveau de perte</b></p>{% endif %}
+                <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                            <a href="{% url 'cate' %} ">Recommencer</button></a>{% else %}
+                <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                        <!-- <iframe src="{% static filename %} " style="width:70%; height:100% " frameborder="0 "></iframe> -->
                             <a href="{% static filename %} ">Générer fiche de décision </a></button> {% endif %}
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+<style>
+    .card-text {
+        font-size: 20px;
+        font-weight: 500;
+    }
+</style>
+
 {% endblock content %}

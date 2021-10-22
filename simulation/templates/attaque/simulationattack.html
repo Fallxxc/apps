@@ -1,13 +1,106 @@
-{% extends 'base.html' %} {% block content %} {% load static %} data2:{{data2 }} <br> data:{{ recup }}
-<div class="w3-row w3-border" style="margin: 40px; ">
+{% extends 'base.html' %} {% block content %} {% load static %}
+
+<br>
+<div class="row" style="margin-left: 2%; margin-right: 2%;">
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">RAS</h5>
+                        <span class="h2 font-weight-bold mb-0">350,897</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fa fa-arrow-up"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last month</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Effectif</h5>
+                        <span class="h2 font-weight-bold mb-0">2,356</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-danger mr-2"><i class="fas fa-arrow-down"></i> 3.48%</span>
+                    <span class="text-nowrap">Since last week</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Sécuritaire</h5>
+                        <span class="h2 font-weight-bold mb-0">924</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
+                            <i class="fas fa-users"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-warning mr-2"><i class="fas fa-arrow-down"></i> 1.10%</span>
+                    <span class="text-nowrap">Since yesterday</span>
+                </p>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="col-xl-3 col-lg-6">
+        <div class="card card-stats mb-4 mb-xl-0">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col">
+                        <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
+                        <span class="h2 font-weight-bold mb-0">49,65%</span>
+                    </div>
+                    <div class="col-auto">
+                        <div class="icon icon-shape bg-info text-white rounded-circle shadow">
+                            <i class="fas fa-percent"></i>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-3 mb-0 text-muted text-sm">
+                    <span class="text-success mr-2"><i class="fas fa-arrow-up"></i> 12%</span>
+                    <span class="text-nowrap">Since last month</span>
+                </p>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-xl-2 col-lg-4">
+        <a href="javascript:history.back()"><button type="button" class="btn btn-outline-primary" style="margin: 20%; font-size: 20px;">Précédent</button></a>
+    </div>
+</div>
+
+
+<!-- <div class="w3-row w3-border" style="margin: 40px; ">
     <div style="margin-bottom:5px; margin-top: 15px; margin-left: 50px;">
-        <h3> <b> Récapitulatif des modalités</b></h3>
+        <h3> <b> Récapitulatif des Modalités</b></h3>
     </div>
     <div class="w3-third w3-container" style="margin-top: 20px; margin-bottom: 20px; ">
         <div class="col-xs-12 col-sm-6 col-md-10">
             <div class="card">
-                <div class="card-body text-center" style="height: 70px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px">
-                    <h4 class="card-title "> <b> Nature information </b> </h4> <br>
+                <div class="card-body text-center" style="height: 80px;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);border-radius: 20px">
+                    <h4 class="card-title "> <b> Nature information </b> </h4>
                 </div>
             </div>
         </div><br>
@@ -37,73 +130,69 @@
         </a>
         <br>
     </div>
-    <div>
+    <div> -->
 
-        <div class="w3-twothird w3-container" style="margin-top: 20px;width: 60%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);">
+<div class="w3-twothird w3-container " style="margin-top: 20px;width: 80%; margin-left: 10%; margin-bottom: 100px; box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
 
-            <div class="col-xs-12 col-sm-6 col-md-12">
-                <div class="card" style="margin-right: 4%;margin-left: 3%;margin-top: 1%;">
-                    <div class="card-body text-center" style="background-color: white;  height: 70px;">
-                        <h3 class="card-title "> <b> Modalités </b> </h3>
-                    </div>
-                </div>
+    <div class="col-xs-12 col-sm-6 col-md-12 ">
+        <div class="card " style="margin-right: 4%;margin-left: 3%;margin-top: 1%; ">
+            <div class="card-body text-center " style="background-color: white; height: 70px; ">
+                <h3 class="card-title "> <b> Modalités </b> </h3>
             </div>
+        </div>
+    </div><br>
+    <div style="background-color: white; width: 100%; border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
+        <div>
+            <div class="card-body">
 
-            <div style="background-color: white; width: 90%; height: 70%; margin: 5%;border-radius: 2%;box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2); ">
-                <div>
-                    <div class="card-body">
+                {% if recup.0 %}
+                <p class="card-text">Nature de l 'information : {{ recup.0 }}</p>
+                {% else %}
+                <p class="card-text">Nature de l 'information: merci de refaire le choix</p>{% endif %}
 
-                        {% if recup.0 %}
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ recup.0 }} &nbsp;&nbsp;</button></h5>{% else %}{% if natinf %}
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Nature de l'information : {{ natinf }} &nbsp;&nbsp;</button></h5>{% else %}
-                        <h5 class="card-title"><button type="button" class="btn btn-primary btn-lg btn-radius">Merci de refaire le le choix sur Nature de l'information &nbsp;&nbsp;</button></h5>{% endif %}{% endif %}
+                <!--  -->
+                {% if recup.1 %}
+                <p class="card-text">Parution: {{ recup.1 }}</p>
+                {% else %}
+                <p class="card-text">Parution: merci de refaire le le choix</p>
+                {% endif %}
 
-                        <!--  -->
-                        {% if recup.1 %}
-                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ recup.1 }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        {% else %}{% if perceptsup %}
-                        <p class="card-text"><button type="button" class="btn btn-secondary btn-lg btn-radius">Parution: {{ paruinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        {% else %}
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Parution &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>
-                        {% endif %}{% endif %}
+                <!-- percepsu -->
+                {% if recup.2 %}
+                <p class="card-text">Perception support: {{ recup.2}}</p>
+                {% else %}
+                <p class="card-text">Perception support</p>
+                {% endif %}
+                <!--rebond  -->
 
+                {% if recup.3 %}
+                <p class="card-text">Rebond de l info / 4 jrs: {{recup.3}}</p>
+                {% else %}
+                <p class="card-text">Rebond de l'info :merci de refaire le le choix</p> {% endif %}
+                <!--  -->
 
-                        <!-- percepsu -->
-                        {% if recup.2 %}
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ recup.2}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>
-                        {% else %}{% if perceptsup %}
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support: {{ perceptsup}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+            </div> <br>
+            <div style="text-align: center;">
+                {% if "Aucun plan d'action ne correspond aux choix effectués" in filename %}
+                <p> {{ filename }} </p>
 
-                        </p> {% else %}
-                        <p class="card-text"><button type="button" class="btn btn-danger btn-lg btn-radius">Perception support&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>
-                        {% endif %} {% endif %}
-                        <!--rebond  -->
-
-                        {% if recup.4 %}
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{recup.4}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></p>
-                        {% else %}{% if rebondinf %}
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l info / 4 jrs: {{ rebondinf }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p>{% else %}
-                        <p class="card-text"><button type="button" class="btn btn-info btn-lg btn-radius">Rebond de l'information &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-                        </p> {% endif %}{% endif %}
-                        <!--  -->
-
-                    </div> <br>
-                    <div style="text-align: center;">
-                        {% if "Aucun plan d'action ne correspond aux choix effectués" in filename %}
-                        <p> {{ filename }} </p>
-                        <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Rebond de l'info</b></p>
-                        <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
-                            <a href="{% url 'Natureinformation' %} ">Recommencer la simulation </button></a><br><br>{% else %}
-                        <h4>Plan d'action</h4>
-                        <h5 class="font-weight-bold"> {{ filename}}</h5> <br>{% endif %}
-                    </div>
-                </div>
+                {% if '' in data2 %}
+                <p>Si vous avez rafraichie la page merci de reprendre l'étape <b> Rebond de l'info</b></p>{% endif %}
+                <button type="button " class="btn btn-outline-dark btn-lg btn-radius " style="color:black; ">
+                            <a href="{% url 'Natureinformation' %} ">Recommencer</button></a><br><br>{% else %}
+                <h4>Plan d'action</h4>
+                <h5 class="font-weight-bold"> {{ filename}}</h5> <br>{% endif %}
             </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+
+<style>
+    .card-text {
+        font-size: 20px;
+        font-weight: 500;
+    }
+</style>
 {% endblock content %}

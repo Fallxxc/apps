@@ -15,7 +15,6 @@ pandas = "*"
 xlrd = "*"
 openpyxl = "*"
 whitenoise = "*"
-django-on-heroku = "*"
 
 [dev-packages]
 

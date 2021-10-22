@@ -31,7 +31,8 @@ body {
     width: 75%
 } */
 
-.options {
+
+/* .options {
     position: relative;
     padding-left: 40px
 }
@@ -85,6 +86,8 @@ body {
     transform: translate(-50%, -50%) scale(1)
 }
 
+*/
+
 
 /* .btn-primary {
     background-color: #555;
@@ -122,37 +125,3 @@ body {
 #team {
     background: #eee !important;
 }
-
-
-/* .btn-primary:hover,
-.btn-primary:focus {
-    background-color: #108d6f;
-    border-color: #108d6f;
-    box-shadow: none;
-    outline: none;
-} */
-
-
-/* .btn-primary {
-    color: #fff;
-    background-color: #007b5e;
-    border-color: #007b5e;
-} */
-
-
-/* section {
-    padding: 60px 0;
-}
-
-section .section-title {
-    text-align: center;
-    color: #007b5e;
-    margin-bottom: 50px;
-    text-transform: uppercase;
-} */
-
-
-/* #team .card {
-    border: none;
-    background: #ffffff;
-} */

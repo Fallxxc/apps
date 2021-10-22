@@ -15,6 +15,7 @@ from django.contrib.auth.models import Group
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
 from django.http import FileResponse, Http404
+from collections import Iterable
 
 # Create your views here.
 import sys
@@ -63,16 +64,16 @@ def home(request):
                 #                            LA GESTION DES ALERTE                         #
                 ############################################################################    
 
+
+
 @login_required(login_url = 'login')        
 def cate(request): 
     cat= Categorie.objects.all()
-
     context={
             "categorie":cat
           }
     return render(request,'alerte/cate.html', context)
-    
-vitess = ''
+
 
 @login_required(login_url = 'login')    
 def vitess_p(request): #1
@@ -80,79 +81,61 @@ def vitess_p(request): #1
     vp= VitessePropagation.objects.all()
     if request.method == 'POST':
         categorie = request.POST.get('categorie')
-        var = request.POST.get('categorie')
-        global vitess
-        vitess = var 
     request.session['categorie'] = categorie       
     context={
         "vitessePropagation":vp }
     return render(request,'alerte/vitessepropa.html', context)
 
-freq = ''
+
 @login_required(login_url = 'login')    
 def frequence(request): #2
     vitesspro =''
     fr= Frequence.objects.all()
     if request.method == 'POST':
         vitesspro = request.POST.get('vitessePropagation')
-        var = request.POST.get('vitessePropagation')
-        global freq
-        freq = var
     request.session['vitesspro'] = vitesspro 
-
     context={
         "frequence":fr }
     return render(request,'alerte/frequence.html', context)
 
-profond = ''
+
 @login_required(login_url = 'login')    
 def profondeur(request):#3
+    frequence = ''
     pro= Profondeur.objects.all()
     if request.method == 'POST':
         frequence = request.POST.get('frequence')
-        var = request.POST.get('frequence')
-        global profond
-        profond = var
-        request.session['frequence'] = frequence       
+    request.session['frequence'] = frequence       
     context={
         'profondeur':pro,
     }
     return render(request,'alerte/profondeur.html', context)
 
-niveaucon = ''
+
 @login_required(login_url = 'login')    
 def niveauControle(request):#4
     profondeur = '' 
     nc= NiveauControle.objects.all()
     if request.method == 'POST':
         profondeur = request.POST.get('profondeur')
-        var = request.POST.get('profondeur')
-        global niveaucon
-        niveaucon = var
     request.session['profondeur'] = profondeur       
     context={
         'niveauControle':nc
             }
     return render(request,'alerte/nivocontrol.html', context)
 
-nivopert = ''
 @login_required(login_url = 'login')    
 def niveauPerte(request):
     nivocnt = ''
     np= NiveauPerte.objects.all()
     if request.method == 'POST':
         nivocnt = request.POST.get('niveauControle')
-        var = request.POST.get('niveauControle')
-        global nivopert
-        nivopert = var
     request.session['nivocnt'] = nivocnt       
     context={
         'niveauPerte':np
     }
     return render(request,'alerte/nivoperte.html', context)
 
-
-from collections import Iterable
 
 def flatten(lis):
      for item in lis:
@@ -162,62 +145,30 @@ def flatten(lis):
          else:        
              yield item
 
+
 @login_required(login_url = 'login')    
 def simulation(request):
     filename = '' 
     nivoperte = '' 
-    recup5, data = [],[]
-    recup5.append(vitess)
-    recup5.append(freq)
-    recup5.append(profond)
-    recup5.append(niveaucon)
-    recup5.append(nivopert)
-    a = nivopert
+    recup_data, data, data2 = [],[],[]
     if request.method == 'POST':
         nivoperte  = request.POST.get('niveauPerte')
-        var  = request.POST.get('niveauPerte')
-        recup5.append(var)  
-    request.session['nivoperte'] = nivoperte         
+
+        request.session['nivoperte'] = nivoperte   
     categorie  = request.session.get('categorie', None)            
     vitesspro  = request.session.get('vitesspro', None)            
     frequence  = request.session.get('frequence', None)            
     profondeur  = request.session.get('profondeur', None)            
     nivocnt  = request.session.get('nivocnt', None)            
-    nivoperte  = request.session.get('nivoperte', None)            
-    data= list(flatten(recup5))
-    data2 = [] 
-    data2.append(categorie)
-    data2.append(vitesspro)
-    data2.append(frequence)
-    data2.append(profondeur)
-    data2.append(nivocnt)
-    data2.append(nivoperte)
-    a = recup5[-1]
+    nivoperte  = request.session.get('nivoperte', None)   
 
-    listes_manq = [] 
-    data= list(flatten(recup5))
-    if len(data)<len(data2):
-        data = data2
-    if data != data2 and '' not in data2 and len(data2)>len(data):
-        data = data2    
-    if len(data)==len(data2) and '' not in data2:
-        data = data2
-        
-    # if len(data)<len(data2):
-    #     data = data2
-    # if '' in data: 
-    #     if len(data2)==6 and '' not in data2:
-    #             data = data2
-    #     elif len(data2)==6 and data2[5]=='':
-    #         for i in range(0,4):
-    #             listes_manq.append(data2[i])
-    #         if data[5] and data[5]!='':
-    #             x =  data[5]     
-    #             data = listes_manq   
-    #             data.append(x)
-    #         else:
-    #             data = data2     
-    
+    data.append(categorie)
+    data.append(vitesspro)
+    data.append(frequence)
+    data.append(profondeur)
+    data.append(nivocnt)
+    data.append(nivoperte)
+
     sanit1 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit2 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Récurrente', 'Nationale', 'Sous Contrôle' , 'Pas de perte Humaine']
     sanit3 = ['Crise ou Catastrophe Sanitaire' , 'Maitrisée' , 'Non récurrente', 'Locale', 'Sous Contrôle' , 'Pas de perte Humaine']
@@ -286,24 +237,34 @@ def simulation(request):
     # la gestion des catastroph sanitaire 
     if data == sanit1:
         filename = 'SANIT1.pdf'
+
     elif data==sanit2:
         filename = 'SANIT2.pdf'
+
     elif data==sanit3:
         filename = 'SANIT3.pdf' 
+
     elif data==sanit4:
         filename = 'SANIT4.pdf'
+
     elif data==sanit5:
-        filename = 'SANIT5.pdf'  
+        filename = 'SANIT5.pdf' 
+
     elif data==sanit6:
         filename = 'SANIT6.pdf'  
+
     elif data==sanit7:
         filename = 'SANIT7.pdf'  
+
     elif data==sanit8:
-        filename = 'SANIT8.pdf'  
+        filename = 'SANIT8.pdf' 
+
     elif data==sanit9:
-        filename = 'SANIT9.pdf'  
+        filename = 'SANIT9.pdf'
+
     elif data==sanit10:
         filename = 'SANIT10.pdf'
+
     elif data==sanit11:
         filename = 'SANIT11.pdf'
 
@@ -441,13 +402,6 @@ def simulation(request):
     context={
         'recup':data,
         'filename':filename,
-        'categorie':categorie,
-        'vitesspro': vitesspro,            
-        'frequence':frequence,          
-        'profondeur'  :profondeur,           
-        'nivocnt' : nivocnt,            
-        'nivoperte': nivoperte,
-        'data2': data2
     }
     return render (request, 'alerte/simulation.html', context) 
 
@@ -463,108 +417,69 @@ def Natureinformation(request):
           }
     return render(request,'attaque/naturinfo.html', context)
 
-nature_info = ''
 @login_required(login_url = 'login')    
 def Parutioninfo(request): #1
     natinf =''
     paruinfo= Parution.objects.all()
     if request.method == 'POST':
         natinf = request.POST.get('natureinfo')
-        global nature_info
-        nature_info = natinf
     request.session['natinf'] = natinf   
     context={
         "paruinfo":paruinfo }
     return render(request,'attaque/paruinfo.html', context)
 
-paru_info = ''
 @login_required(login_url = 'login')    
 def Perceptsupport(request): #2
     paruinf =''
     percepsupport= Perceptionsupport.objects.all()
     if request.method == 'POST':
         paruinf = request.POST.get('paruinfo')
-        global paru_info
-        paru_info = paruinf   
     request.session['paruinf'] = paruinf   
      
     context={
         "percepsupport":percepsupport}
     return render(request,'attaque/perceptionsupport.html', context)
 
-rebond_info = ''
 @login_required(login_url = 'login')    
 def Rebondinfo(request):#3
     perceptsup = ''
     rebond= Rebond.objects.all()
     if request.method == 'POST':
         perceptsup = request.POST.get('percepsupport')
-        global rebond_info
-        rebond_info = perceptsup
     request.session['perceptsup'] = perceptsup   
     context={
         'rebond':rebond,
     }
     return render(request,'attaque/rebond.html', context)
 
-nip =''
 @login_required(login_url = 'login')    
 def simulationattack(request):
     action = '' 
     rebondinf = ''
-    recup5, data, data2 = [],[],[]
-    recup5.append(nature_info)
-    recup5.append(paru_info)
-    recup5.append(rebond_info)
     if request.method == 'POST':
         rebondinf  = request.POST.get('rebond')
         request.session['rebondinf'] = rebondinf   
-        global nip
-        nip = rebondinf
-        recup5.append(rebondinf)   
     natinf  = request.session.get('natinf', None)        
     paruinf  = request.session.get('paruinf', None)        
     perceptsup  = request.session.get('perceptsup', None)        
     rebondinf  = request.session.get('rebondinf', None)   
-    data2 = [] 
-    data2.append(natinf)
-    data2.append(paruinf)
-    data2.append(perceptsup)
-    data2.append(rebondinf)
+    data = [] 
+    data.append(natinf)
+    data.append(paruinf)
+    data.append(perceptsup)
+    data.append(rebondinf)
 
-    listes_manq = [] 
-    data= list(flatten(recup5))
    
-    if len(data)<len(data2):
-        data = data2
-    if data != data2 and '' not in data2 and len(data2)>len(data):
-        data = data2    
-    if len(data)==len(data2) and '' not in data2:
-        data = data2
-    
-    # if len(data)<4 or '' in data: 
-    #     if len(data2)==4 and '' not in data2:
-    #             data = data2
-    #     elif len(data2)==4 and data2[3]=='' and len(data)==3:
-    #         for i in range(0,2):
-    #             listes_manq.append(data2[i])
-    #         if data[3] and data[3]!='':
-    #             x =  data[3]    
-    #             data = listes_manq   
-    #             data.append(x)
-    #         else:
-    #             data = data2     
-    # print(len(data)len(data2))    
     Action1 = ['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"RAS"]   # -
     Action2 =['Fausse (Fake news)',          	"Page RS de l'entreprise",   	"Image de l'entreprise",	"Effectif"] #     
     Action3 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"RAS"]	    #-     
     Action4 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Crédible",             	"Effectif"] #-   	 
     Action5 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "RAS"]       #	 
-    Action6 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "Effectif"]    	 
-    Action7 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"RAS"]       	 
-    Action8 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"Effectif"]    	 
-    Action9 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Pas crédible",	            "RAS"]       	 
-    Action10=['Fausse (Fake news)',          	"Article Site d'actualité",	    "Pas crédible",	            "Effectif"]    	  
+    Action6 =['Fausse (Fake news)',          	"Fil de discussion RS / Blog",	"Pas crédible",	            "Effectif"]  #  	 
+    Action7 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"RAS"]       #	 
+    Action8 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Crédible",             	"Effectif"]   # 	 
+    Action9 =['Fausse (Fake news)',          	"Article Site d'actualité",	    "Pas crédible",	            "RAS"]       	# 
+    Action10=['Fausse (Fake news)',          	"Article Site d'actualité",	    "Pas crédible",	            "Effectif"]    	 # 
     Action11=['Fausse (Fake news)',          	"Presse",                   	"Crédible",             	"RAS"]       	  
     Action12=['Fausse (Fake news)',          	"Presse",                   	"Crédible",             	"Effectif"]    	  
     Action13=['Fausse (Fake news)',          	"Presse",                   	"Pas crédible",	            "RAS"]       	 
@@ -683,15 +598,9 @@ def simulationattack(request):
         action="Capitalisation sur image (Exemple ..."            
     else:
         action = "Aucun plan d'action ne correspond aux choix effectués"
-
     context={
         'recup':data,
         'filename':action,
-        'natinf': natinf, 
-        'paruinf':paruinf,
-        'perceptsup':perceptsup,
-        'rebondinf':rebondinf ,
-        'data2': data2  
          }
     return render (request, 'attaque/simulationattack.html', context)
 
