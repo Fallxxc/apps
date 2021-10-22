@@ -428,6 +428,7 @@ def Parutioninfo(request): #1
         "paruinfo":paruinfo }
     return render(request,'attaque/paruinfo.html', context)
 
+
 @login_required(login_url = 'login')    
 def Perceptsupport(request): #2
     paruinf =''
